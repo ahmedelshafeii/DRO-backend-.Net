@@ -1,0 +1,14 @@
+D:\Ahmed\Web\VSProjects\DRO\core\bin\Debug\net6.0\Core.deps.json
+D:\Ahmed\Web\VSProjects\DRO\core\bin\Debug\net6.0\Core.dll
+D:\Ahmed\Web\VSProjects\DRO\core\bin\Debug\net6.0\Core.pdb
+D:\Ahmed\Web\VSProjects\DRO\core\obj\Debug\net6.0\Core.csproj.AssemblyReference.cache
+D:\Ahmed\Web\VSProjects\DRO\core\obj\Debug\net6.0\Core.GeneratedMSBuildEditorConfig.editorconfig
+D:\Ahmed\Web\VSProjects\DRO\core\obj\Debug\net6.0\Core.AssemblyInfoInputs.cache
+D:\Ahmed\Web\VSProjects\DRO\core\obj\Debug\net6.0\Core.AssemblyInfo.cs
+D:\Ahmed\Web\VSProjects\DRO\core\obj\Debug\net6.0\Core.csproj.CoreCompileInputs.cache
+D:\Ahmed\Web\VSProjects\DRO\core\obj\Debug\net6.0\Core.dll
+D:\Ahmed\Web\VSProjects\DRO\core\obj\Debug\net6.0\refint\Core.dll
+D:\Ahmed\Web\VSProjects\DRO\core\obj\Debug\net6.0\Core.pdb
+D:\Ahmed\Web\VSProjects\DRO\core\obj\Debug\net6.0\ref\Core.dll
+D:\Ahmed\Web\VSProjects\DRO\core\bin\Debug\net6.0\Core.runtimeconfig.json
+D:\Ahmed\Web\VSProjects\DRO\core\obj\Debug\net6.0\Core.genruntimeconfig.cache
