@@ -14,9 +14,9 @@ namespace Core.Entities
         public string Department { get; set; }
 
         //Navigator Propirties
-
+        
         [ForeignKey("User")]
         public string UserId { get; set; }
-        public virtual User User { get; set; }
+        public virtual Patient User { get; set; }
     }
 }

@@ -69,7 +69,7 @@ namespace Infrastructure.Data.Migrations
                     b.ToTable("Doctors");
                 });
 
-            modelBuilder.Entity("Core.Entities.User", b =>
+            modelBuilder.Entity("Core.Entities.Patient", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -77,7 +77,7 @@ namespace Infrastructure.Data.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime?>("BirthDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -92,6 +92,9 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Gender")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("LastName")
@@ -290,7 +293,7 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Core.Entities.Doctor", b =>
                 {
-                    b.HasOne("Core.Entities.User", "User")
+                    b.HasOne("Core.Entities.Patient", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
 
@@ -308,7 +311,7 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Core.Entities.User", null)
+                    b.HasOne("Core.Entities.Patient", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -317,7 +320,7 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Core.Entities.User", null)
+                    b.HasOne("Core.Entities.Patient", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -332,7 +335,7 @@ namespace Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Core.Entities.User", null)
+                    b.HasOne("Core.Entities.Patient", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -341,7 +344,7 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("Core.Entities.User", null)
+                    b.HasOne("Core.Entities.Patient", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
