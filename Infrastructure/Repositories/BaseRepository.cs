@@ -28,5 +28,11 @@ namespace Infrastructure.Repositories
         {
             return await _context.Set<T>().FindAsync(id);
         }
+
+        public void AddAsync(T user)
+        {
+            _context.Set<T>().Add(user);
+            _context.SaveChanges();
+        }
     }
 }

@@ -1,4 +1,6 @@
-﻿namespace API.DTOs.Patient
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace API.DTOs.Patient
 {
     public class PatientRegisterDto
     {
@@ -8,6 +10,8 @@
         public string UserName { get; set; }
         public string Email { get; set; }
         public string Password { get; set; }
+        [Compare(nameof(Password),ErrorMessage ="password don't match")]
+        public string ConfirmPassword { get; set; }
         public string Gender { get; set; }
 
     }

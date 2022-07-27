@@ -10,6 +10,7 @@ namespace Core.Interfaces
     {
         public Task<IReadOnlyList<T>> GetAllAsync();
         public Task<T> GetByIdAsync(int id);
+        public void AddAsync(T user);
     }
 
 }
