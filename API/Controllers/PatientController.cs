@@ -5,7 +5,10 @@ using Core.Entities;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Text;
 
 namespace API.Controllers
 {
@@ -16,11 +19,15 @@ namespace API.Controllers
         private readonly IPatientRepository _context;
         private readonly UserManager<Patient> _userManager;
         private readonly IMapper _mapper;
-        public PatientController(IPatientRepository context,UserManager<Patient> userManager,IMapper mapper)
+        private readonly IConfiguration _config;
+        public PatientController(IPatientRepository context,
+            UserManager<Patient> userManager,IMapper mapper,
+            IConfiguration config)
         {
             this._userManager = userManager;
             this._context = context;
             this._mapper = mapper;
+            this._config = config;
         }
 
         [HttpGet]
@@ -32,16 +39,7 @@ namespace API.Controllers
         [HttpPost("Register")]
         public async Task<ActionResult> Register(PatientRegisterDto registerDto)
         {
-            //Patient patient = new Patient()
-            //{
-            //    FirstName = registerDto.FirstName,
-            //    MiddleName = registerDto.MiddleName,
-            //    LastName = registerDto.LastName,
-            //    UserName = registerDto.UserName,
-            //    Email = registerDto.Email,
-            //    Gender = registerDto.Gender
-            //};
-
+           
             Patient patient = _mapper.Map<Patient>(registerDto);
 
 
@@ -49,9 +47,9 @@ namespace API.Controllers
 
             if (!creationResult.Succeeded)
             {
-                foreach(var i in creationResult.Errors)
+                foreach(var error in creationResult.Errors)
                 {
-                    ModelState.AddModelError(i.Code,i.Description);
+                    ModelState.AddModelError(error.Code,error.Description);
                 }
                 return BadRequest(ModelState);
             }
@@ -66,6 +64,41 @@ namespace API.Controllers
             await _userManager.AddClaimsAsync(patient, claims);
 
             return Ok("Created Successfully");
+        }
+
+        [HttpPost("Login")]
+        public async Task<ActionResult> Login(PatientLoginDto loginDto)
+        {
+            Patient patient = await _userManager.FindByNameAsync(loginDto.UserName);
+            if (patient == null) return BadRequest("Not Found");
+
+            if (await _userManager.IsLockedOutAsync(patient)) return BadRequest("Try Again Later");
+
+            bool res = await _userManager.CheckPasswordAsync(patient,loginDto.Password);
+            if (!res)
+            {
+                await _userManager.AccessFailedAsync(patient);
+                return BadRequest("Wrong password");
+            }
+
+            var claims = await _userManager.GetClaimsAsync(patient);
+
+            var key = _config.GetValue<string>("Key");
+            var keyInBytes = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key));
+            var securedKey = new SigningCredentials(keyInBytes, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer:"Server",
+                audience:"backend",
+                claims: claims,
+                expires:DateTime.Now.AddMinutes(15),
+                signingCredentials:securedKey
+                );
+
+            var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
+
+            return Ok(new {Token= tokenString, exp= DateTime.Now.AddMinutes(15)});            
+
         }
 
     }
