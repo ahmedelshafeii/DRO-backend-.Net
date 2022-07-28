@@ -1,4 +1,5 @@
-﻿using API.DTOs.Doctor;
+﻿using API.DTOs.Clinic;
+using API.DTOs.Doctor;
 using API.DTOs.Patient;
 using AutoMapper;
 using Core.Entities;
@@ -11,6 +12,7 @@ namespace API.MapHelper
         {
             CreateMap<PatientRegisterDto,User>();
             CreateMap<DoctorRegisterDto, Doctor>();
+            CreateMap<ClinicDto, Clinic>();
         }
 
     }

@@ -70,3 +70,4 @@ D:\Ahmed\Web\VSProjects\DRO\api\bin\Debug\net6.0\Humanizer.dll
 D:\Ahmed\Web\VSProjects\DRO\api\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Design.dll
 D:\Ahmed\Web\VSProjects\DRO\api\bin\Debug\net6.0\AutoMapper.dll
 D:\Ahmed\Web\VSProjects\DRO\api\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Ahmed\Web\VSProjects\DRO\API\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

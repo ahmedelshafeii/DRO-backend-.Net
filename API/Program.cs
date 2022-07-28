@@ -6,6 +6,9 @@ using Infrastructure.Data;
 using Infrastructure.Repositories;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Security.Claims;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -42,6 +45,29 @@ builder.Services.AddIdentity<User, IdentityRole>(options =>
 
 }).AddEntityFrameworkStores<HospitalContext>();
 
+builder.Services.AddAuthorization(options =>
+{
+    options.AddPolicy("Doctor",policy=>policy.RequireClaim(ClaimTypes.Role,"Doctor"));
+});
+
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = "Default";
+    options.DefaultChallengeScheme = "Default";
+}).AddJwtBearer("Default", o =>
+{
+    var key = builder.Configuration.GetValue<string>("Key");
+    var keyInBytes = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key));
+
+    o.TokenValidationParameters = new TokenValidationParameters
+    {
+        IssuerSigningKey = keyInBytes,
+        ValidateIssuer = false,
+        ValidateAudience = false,
+    };
+
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -53,6 +79,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
