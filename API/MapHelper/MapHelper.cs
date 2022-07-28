@@ -9,7 +9,7 @@ namespace API.MapHelper
     {
         public MapHelper()
         {
-            CreateMap<PatientRegisterDto,Patient>();
+            CreateMap<PatientRegisterDto,User>();
             CreateMap<DoctorRegisterDto, Doctor>();
         }
 

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Data
 {
-    public class HospitalContext : IdentityDbContext<Patient>
+    public class HospitalContext : IdentityDbContext<User>
     {
         public HospitalContext(DbContextOptions options):base(options)
         {
@@ -20,7 +20,7 @@ namespace Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
-            builder.Entity<Patient>().ToTable("Users");
+            builder.Entity<User>().ToTable("Users");
   
         }
 

@@ -1,4 +1,5 @@
 ﻿
+using API.DTOs;
 using API.DTOs.Patient;
 using AutoMapper;
 using Core.Entities;
@@ -17,11 +18,11 @@ namespace API.Controllers
     public class PatientController : ControllerBase
     {
         private readonly IPatientRepository _context;
-        private readonly UserManager<Patient> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
         private readonly IConfiguration _config;
         public PatientController(IPatientRepository context,
-            UserManager<Patient> userManager,IMapper mapper,
+            UserManager<User> userManager,IMapper mapper,
             IConfiguration config)
         {
             this._userManager = userManager;
@@ -31,7 +32,7 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IReadOnlyList<Patient>>> Patients()
+        public async Task<ActionResult<IReadOnlyList<User>>> Patients()
         {
             return Ok(await _context.GetAllAsync());
         }
@@ -40,7 +41,7 @@ namespace API.Controllers
         public async Task<ActionResult> Register(PatientRegisterDto registerDto)
         {
            
-            Patient patient = _mapper.Map<Patient>(registerDto);
+            User patient = _mapper.Map<User>(registerDto);
 
 
             var creationResult = await _userManager.CreateAsync(patient,registerDto.Password);
@@ -67,9 +68,9 @@ namespace API.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<ActionResult> Login(PatientLoginDto loginDto)
+        public async Task<ActionResult> Login(LoginDto loginDto)
         {
-            Patient patient = await _userManager.FindByNameAsync(loginDto.UserName);
+            User patient = await _userManager.FindByNameAsync(loginDto.UserName);
             if (patient == null) return BadRequest("Not Found");
 
             if (await _userManager.IsLockedOutAsync(patient)) return BadRequest("Try Again Later");
@@ -97,7 +98,7 @@ namespace API.Controllers
 
             var tokenString = new JwtSecurityTokenHandler().WriteToken(token);
 
-            return Ok(new {Token= tokenString, exp= DateTime.Now.AddMinutes(15)});            
+            return Ok(new {Token= tokenString, Exp= DateTime.Now.AddMinutes(15)});            
 
         }
 

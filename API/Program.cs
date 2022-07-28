@@ -27,7 +27,7 @@ builder.Services.AddDbContext<HospitalContext>(o=>o.UseSqlServer(
     builder.Configuration.GetConnectionString("Default")
     ));
 
-builder.Services.AddIdentity<Patient, IdentityRole>(options =>
+builder.Services.AddIdentity<User, IdentityRole>(options =>
 {
     options.Password.RequiredLength = 5;
     options.Password.RequiredUniqueChars =0;

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Core.Interfaces
 {
-    public interface IPatientRepository:IBaseRepository<Patient>
+    public interface IPatientRepository:IBaseRepository<User>
     {
 
     }

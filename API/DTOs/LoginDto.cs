@@ -1,6 +1,6 @@
-﻿namespace API.DTOs.Patient
+﻿namespace API.DTOs
 {
-    public class PatientLoginDto
+    public class LoginDto
     {
         public string UserName { get; set; }
         public string Password { get; set; }

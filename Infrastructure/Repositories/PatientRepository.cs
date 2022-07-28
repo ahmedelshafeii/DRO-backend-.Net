@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Infrastructure.Repositories
 {
-    public class PatientRepository : BaseRepository<Patient>, IPatientRepository
+    public class PatientRepository : BaseRepository<User>, IPatientRepository
     {
 
         private readonly HospitalContext _context;

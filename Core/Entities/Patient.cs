@@ -3,7 +3,7 @@
 
 namespace Core.Entities
 {
-    public class Patient : IdentityUser
+    public class User : IdentityUser
     {
         
         public string FirstName { get; set; }
