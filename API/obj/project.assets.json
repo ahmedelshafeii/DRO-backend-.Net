@@ -2979,11 +2979,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Ahmed\\Web\\VSProjects\\DRO\\api\\API.csproj",
+      "projectUniqueName": "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\api\\API.csproj",
       "projectName": "API",
-      "projectPath": "D:\\Ahmed\\Web\\VSProjects\\DRO\\api\\API.csproj",
+      "projectPath": "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\api\\API.csproj",
       "packagesPath": "C:\\Users\\Ahmed\\.nuget\\packages\\",
-      "outputPath": "D:\\Ahmed\\Web\\VSProjects\\DRO\\api\\obj\\",
+      "outputPath": "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\api\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -3000,8 +3000,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Ahmed\\Web\\VSProjects\\DRO\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "D:\\Ahmed\\Web\\VSProjects\\DRO\\Infrastructure\\Infrastructure.csproj"
+            "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }

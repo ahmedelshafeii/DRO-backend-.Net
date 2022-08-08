@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "vTtt742AB2et5w21q75NJ1m0I/xkxXJZW2UwKmVw6Z7JNSenvQR85/FPXbmzT0A3y2wCxKr0Q7N/sm+2UMyhoA==",
+  "dgSpecHash": "ti0i5T/La2+36aoUTtSvp1hjfV0oAbV/FaiAi6UxxoiR3CaTFyvojxvNXvHM52TX2jO6LtP0VB3J+xbo05ApFQ==",
   "success": true,
-  "projectFilePath": "D:\\Ahmed\\Web\\VSProjects\\DRO\\API\\API.csproj",
+  "projectFilePath": "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\api\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ahmed\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\Ahmed\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",

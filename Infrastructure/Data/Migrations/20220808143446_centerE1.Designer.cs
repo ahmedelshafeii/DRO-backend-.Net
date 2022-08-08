@@ -9,11 +9,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Infrastructure.data.migrations
+namespace Infrastructure.Data.Migrations
 {
     [DbContext(typeof(HospitalContext))]
-    [Migration("20220727215419_EditPatientEntity")]
-    partial class EditPatientEntity
+    [Migration("20220808143446_centerE1")]
+    partial class centerE1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -24,7 +24,7 @@ namespace Infrastructure.data.migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Core.Entities.Clinic", b =>
+            modelBuilder.Entity("Core.Entities.Center", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,18 +33,104 @@ namespace Infrastructure.data.migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("DocId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid?>("DoctorId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("Rate")
+                        .HasColumnType("int");
 
-                    b.Property<string>("Phone")
+                    b.Property<string>("Speciality")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
+                    b.ToTable("Centers");
+                });
+
+            modelBuilder.Entity("Core.Entities.Center_doctor", b =>
+                {
+                    b.Property<Guid>("CenterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("FEE")
+                        .HasColumnType("float");
+
+                    b.HasKey("CenterId", "DoctorId");
+
                     b.HasIndex("DoctorId");
+
+                    b.ToTable("Center_Doctors");
+                });
+
+            modelBuilder.Entity("Core.Entities.CenterInsurance", b =>
+                {
+                    b.Property<Guid>("CenterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("InsuranceCompany")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CenterId", "InsuranceCompany");
+
+                    b.ToTable("Center_Insurances");
+                });
+
+            modelBuilder.Entity("Core.Entities.CenterPhone", b =>
+                {
+                    b.Property<Guid>("CenterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Phone")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CenterId", "Phone");
+
+                    b.ToTable("Center_Phones");
+                });
+
+            modelBuilder.Entity("Core.Entities.CenterSpeciality", b =>
+                {
+                    b.Property<Guid>("CenterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Speciality")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CenterId", "Speciality");
+
+                    b.ToTable("Center_Specialities");
+                });
+
+            modelBuilder.Entity("Core.Entities.Clinic", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("DocId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<double>("FEE")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("clinicName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DocId");
 
                     b.ToTable("Clinics");
                 });
@@ -149,6 +235,30 @@ namespace Infrastructure.data.migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("Users", (string)null);
+                });
+
+            modelBuilder.Entity("Core.Entities.WeekDays", b =>
+                {
+                    b.Property<Guid>("CenterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("Day")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("ClinicId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("EndTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("CenterId", "Day", "StartTime");
+
+                    b.HasIndex("ClinicId");
+
+                    b.ToTable("WeekDays");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -284,11 +394,65 @@ namespace Infrastructure.data.migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Core.Entities.Center_doctor", b =>
+                {
+                    b.HasOne("Core.Entities.Center", "Center")
+                        .WithMany("Doctor_Centers")
+                        .HasForeignKey("CenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Doctor", "Doctor")
+                        .WithMany("Doctor_Centers")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Center");
+
+                    b.Navigation("Doctor");
+                });
+
+            modelBuilder.Entity("Core.Entities.CenterInsurance", b =>
+                {
+                    b.HasOne("Core.Entities.Center", "Center")
+                        .WithMany("Center_Insurances")
+                        .HasForeignKey("CenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Center");
+                });
+
+            modelBuilder.Entity("Core.Entities.CenterPhone", b =>
+                {
+                    b.HasOne("Core.Entities.Center", "Center")
+                        .WithMany("Center_Phones")
+                        .HasForeignKey("CenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Center");
+                });
+
+            modelBuilder.Entity("Core.Entities.CenterSpeciality", b =>
+                {
+                    b.HasOne("Core.Entities.Center", "Center")
+                        .WithMany("Center_Specialities")
+                        .HasForeignKey("CenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Center");
+                });
+
             modelBuilder.Entity("Core.Entities.Clinic", b =>
                 {
                     b.HasOne("Core.Entities.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId");
+                        .WithMany("Clinics")
+                        .HasForeignKey("DocId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Doctor");
                 });
@@ -300,6 +464,25 @@ namespace Infrastructure.data.migrations
                         .HasForeignKey("UserId");
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Core.Entities.WeekDays", b =>
+                {
+                    b.HasOne("Core.Entities.Center", "Center")
+                        .WithMany("Center_WeekDays")
+                        .HasForeignKey("CenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Clinic", "Clinic")
+                        .WithMany("WeekDays")
+                        .HasForeignKey("ClinicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Center");
+
+                    b.Navigation("Clinic");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -351,6 +534,31 @@ namespace Infrastructure.data.migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Core.Entities.Center", b =>
+                {
+                    b.Navigation("Center_Insurances");
+
+                    b.Navigation("Center_Phones");
+
+                    b.Navigation("Center_Specialities");
+
+                    b.Navigation("Center_WeekDays");
+
+                    b.Navigation("Doctor_Centers");
+                });
+
+            modelBuilder.Entity("Core.Entities.Clinic", b =>
+                {
+                    b.Navigation("WeekDays");
+                });
+
+            modelBuilder.Entity("Core.Entities.Doctor", b =>
+                {
+                    b.Navigation("Clinics");
+
+                    b.Navigation("Doctor_Centers");
                 });
 #pragma warning restore 612, 618
         }

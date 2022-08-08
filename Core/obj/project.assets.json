@@ -2683,11 +2683,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Ahmed\\Web\\VSProjects\\DRO\\core\\Core.csproj",
+      "projectUniqueName": "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\core\\Core.csproj",
       "projectName": "Core",
-      "projectPath": "D:\\Ahmed\\Web\\VSProjects\\DRO\\core\\Core.csproj",
+      "projectPath": "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\core\\Core.csproj",
       "packagesPath": "C:\\Users\\Ahmed\\.nuget\\packages\\",
-      "outputPath": "D:\\Ahmed\\Web\\VSProjects\\DRO\\core\\obj\\",
+      "outputPath": "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\core\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",

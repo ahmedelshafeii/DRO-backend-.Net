@@ -2665,11 +2665,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Ahmed\\Web\\VSProjects\\DRO\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "D:\\Ahmed\\Web\\VSProjects\\DRO\\Infrastructure\\Infrastructure.csproj",
+      "projectPath": "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\Infrastructure\\Infrastructure.csproj",
       "packagesPath": "C:\\Users\\Ahmed\\.nuget\\packages\\",
-      "outputPath": "D:\\Ahmed\\Web\\VSProjects\\DRO\\Infrastructure\\obj\\",
+      "outputPath": "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Ahmed\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2686,8 +2686,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Ahmed\\Web\\VSProjects\\DRO\\core\\Core.csproj": {
-              "projectPath": "D:\\Ahmed\\Web\\VSProjects\\DRO\\core\\Core.csproj"
+            "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\core\\Core.csproj": {
+              "projectPath": "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\core\\Core.csproj"
             }
           }
         }

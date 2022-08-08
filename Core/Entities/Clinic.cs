@@ -28,6 +28,8 @@ namespace Core.Entities
         public Guid DocId { get; set; }
         public virtual Doctor Doctor { get; set; }
 
+        public virtual List<WeekDays> WeekDays { get; set; }
+
 
     }
 }

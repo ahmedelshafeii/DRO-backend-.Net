@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "eNP6cHskSJ3Hl/2dSdXQjmE9Z/wx13gFOZ063d0OKNkjLntD7qXX+MpfOAK4qgbtqN21JbEKvMu7o2a6vRugRg==",
+  "dgSpecHash": "tphCG0ztPC4E6/mODbdKOMoZ8tdO7HNeiY74702wuuw/P2NNCd39hrlxyQbgKRYzPmHymPVTvNlUJiBfz4Vk/w==",
   "success": true,
-  "projectFilePath": "D:\\Ahmed\\Web\\VSProjects\\DRO\\core\\Core.csproj",
+  "projectFilePath": "D:\\Ahmed\\Web\\VSProjects\\Doctor-Reservation-Online\\core\\Core.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Ahmed\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Ahmed\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
