@@ -24,6 +24,7 @@ builder.Services.AddAutoMapper(typeof(MapHelper));
 
 builder.Services.AddScoped(typeof(IBaseRepository<>),typeof(BaseRepository<>));
 builder.Services.AddScoped<IPatientRepository, PatientRepository>();
+builder.Services.AddScoped<ICenterRepository, CenterRepository>();
 
 
 builder.Services.AddDbContext<HospitalContext>(o=>o.UseSqlServer(

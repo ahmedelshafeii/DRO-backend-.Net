@@ -9,7 +9,7 @@ namespace Core.Interfaces
     public interface IBaseRepository<T>
     {
         public Task<IReadOnlyList<T>> GetAllAsync();
-        public Task<T> GetByIdAsync(int id);
+        public Task<T> GetByIdAsync(Guid id);
         public void AddAsync(T user);
     }
 

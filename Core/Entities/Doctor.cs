@@ -19,7 +19,14 @@ namespace Core.Entities
         public string UserId { get; set; }
         public virtual User User { get; set; }
 
+        
+
         public virtual List<Center_doctor> Doctor_Centers { get; set;}
         public virtual List<Clinic> Clinics { get; set; }
+
+        //public virtual List<Center> CentersManage { get; set; }
+
+        
+
     }
 }

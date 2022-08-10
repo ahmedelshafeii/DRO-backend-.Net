@@ -91,7 +91,8 @@ namespace API.Controllers
 
 
             var claims = await _userManager.GetClaimsAsync(user);
-            var role = claims[0].Value;
+            var role = claims.FirstOrDefault(c => c.Type == ClaimTypes.Role).Value;
+
 
             if (role != "Doctor") return Unauthorized("You are not a doctor");
 

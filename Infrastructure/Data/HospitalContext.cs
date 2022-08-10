@@ -14,7 +14,6 @@ namespace Infrastructure.Data
     {
         public HospitalContext(DbContextOptions options):base(options)
         {
-
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -26,6 +25,7 @@ namespace Infrastructure.Data
             builder.Entity<CenterInsurance>().HasKey(k => new {k.CenterId,k.InsuranceCompany});
             builder.Entity<CenterSpeciality>().HasKey(k => new {k.CenterId,k.Speciality});
             builder.Entity<WeekDays>().HasKey(k => new {k.CenterId,k.Day,k.StartTime});
+           
         }
 
         public virtual DbSet<Doctor> Doctors { get; set; }

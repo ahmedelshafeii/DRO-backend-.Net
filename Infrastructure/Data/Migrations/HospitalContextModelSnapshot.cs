@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Infrastructure.Data.Migrations
+namespace Infrastructure.data.migrations
 {
     [DbContext(typeof(HospitalContext))]
     partial class HospitalContextModelSnapshot : ModelSnapshot
@@ -32,12 +32,6 @@ namespace Infrastructure.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Rate")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Speciality")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
@@ -395,7 +389,7 @@ namespace Infrastructure.Data.Migrations
             modelBuilder.Entity("Core.Entities.Center_doctor", b =>
                 {
                     b.HasOne("Core.Entities.Center", "Center")
-                        .WithMany("Doctor_Centers")
+                        .WithMany("Center_Doctors")
                         .HasForeignKey("CenterId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -536,6 +530,8 @@ namespace Infrastructure.Data.Migrations
 
             modelBuilder.Entity("Core.Entities.Center", b =>
                 {
+                    b.Navigation("Center_Doctors");
+
                     b.Navigation("Center_Insurances");
 
                     b.Navigation("Center_Phones");
@@ -543,8 +539,6 @@ namespace Infrastructure.Data.Migrations
                     b.Navigation("Center_Specialities");
 
                     b.Navigation("Center_WeekDays");
-
-                    b.Navigation("Doctor_Centers");
                 });
 
             modelBuilder.Entity("Core.Entities.Clinic", b =>
