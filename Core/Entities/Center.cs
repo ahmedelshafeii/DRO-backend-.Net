@@ -19,7 +19,7 @@ namespace Core.Entities
 
 
         //[ForeignKey("Doctor")]
-        //public Guid DocAdminId { get; set; }
+        public Guid DocAdminId { get; set; }
 
         //public Doctor Doctor { get; set; }
 

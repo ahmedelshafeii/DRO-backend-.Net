@@ -18,7 +18,10 @@ namespace Core.Interfaces
 
         public IEnumerable<Center> getCenters();
 
-        
+        public Center getCenter(Guid id);
+
+
+
 
 
     }

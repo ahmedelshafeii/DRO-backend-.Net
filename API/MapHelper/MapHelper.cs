@@ -14,6 +14,7 @@ namespace API.MapHelper
             CreateMap<PatientRegisterDto,User>();
             CreateMap<DoctorRegisterDto, Doctor>();
             CreateMap<ClinicDto, Clinic>();
+
             CreateMap<Center, CenterDto>()
                 .ForMember(i=>i.Center_Phones,x=>x.MapFrom(x=>x.Center_Phones.Select(i=>i.Phone)))
                 .ForMember(i=>i.Center_Doctors,x=>x.MapFrom(i=>i.Center_Doctors.Select(i=>i.DoctorId)))

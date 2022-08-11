@@ -31,10 +31,15 @@ namespace Infrastructure.data.migrations
                     b.Property<string>("Address")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("DocAdminId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DocAdminId");
 
                     b.ToTable("Centers");
                 });
@@ -386,6 +391,15 @@ namespace Infrastructure.data.migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Core.Entities.Center", b =>
+                {
+                    b.HasOne("Core.Entities.Doctor", null)
+                        .WithMany("CentersManage")
+                        .HasForeignKey("DocAdminId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Core.Entities.Center_doctor", b =>
                 {
                     b.HasOne("Core.Entities.Center", "Center")
@@ -548,6 +562,8 @@ namespace Infrastructure.data.migrations
 
             modelBuilder.Entity("Core.Entities.Doctor", b =>
                 {
+                    b.Navigation("CentersManage");
+
                     b.Navigation("Clinics");
 
                     b.Navigation("Doctor_Centers");

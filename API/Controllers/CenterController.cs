@@ -21,7 +21,7 @@ namespace API.Controllers
             this._mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet("all")]
         public  ActionResult GetCenters()
         {
             var centers = _baseContext.getCenters();
@@ -31,18 +31,31 @@ namespace API.Controllers
             return Ok(centersDto);
         }
 
+        [HttpGet]
+        public ActionResult GetCenter(Guid id)
+        {
+
+            Center center = _baseContext.getCenter(id);
+            if(center == null) 
+                return BadRequest("Something Wrong!");
+           CenterDto centerDto =  _mapper.Map<CenterDto>(center);
+
+            return Ok(centerDto);
+            
+        }
+
         [HttpPost]
-        public ActionResult AddCenter([FromBody]AddCenterDTO centerDTO)
+        public ActionResult CreateCenter([FromBody]AddCenterDTO centerDTO)
         {
             Center center = new Center
             {
                 Name = centerDTO.Name,
                 Address = centerDTO.Address,
-                //DocAdminId = centerDTO.DoctorId
+                DocAdminId = centerDTO.DocAdminId
             };
             _baseContext.AddAsync(center);
 
-            return Ok("Created");
+            return CreatedAtAction("GetCenter",new {id = center.Id},center);
         }
 
         [HttpPost("Phone")]
@@ -76,9 +89,18 @@ namespace API.Controllers
                 CenterId = centerSpecialityDto.CenterId,
                 Speciality = centerSpecialityDto.Speciality
             };
-            _baseContext.AddSpeciality(centerSpeciality);
+            try
+            {
+                _baseContext.AddSpeciality(centerSpeciality);
+            }
+            catch
+            {
+                return BadRequest("Something Wrong!");
+            }
+           
             return Ok("Created");
         }
+
 
 
 

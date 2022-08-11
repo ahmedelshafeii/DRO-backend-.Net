@@ -25,6 +25,9 @@ namespace Infrastructure.Data
             builder.Entity<CenterInsurance>().HasKey(k => new {k.CenterId,k.InsuranceCompany});
             builder.Entity<CenterSpeciality>().HasKey(k => new {k.CenterId,k.Speciality});
             builder.Entity<WeekDays>().HasKey(k => new {k.CenterId,k.Day,k.StartTime});
+            builder.Entity<Doctor>()
+                .HasMany(m => m.CentersManage).WithOne().OnDelete(DeleteBehavior.NoAction)
+                .HasForeignKey(f => f.DocAdminId);
            
         }
 

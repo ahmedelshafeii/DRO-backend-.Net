@@ -40,6 +40,14 @@ namespace Infrastructure.Repositories
             _context.SaveChanges();
         }
 
+        public Center getCenter(Guid id)
+        {
+            return _context.Centers.Include(i => i.Center_Phones)
+                .Include(i => i.Center_Insurances)
+                .Include(i => i.Center_Doctors)
+                .Include(i => i.Center_Specialities).FirstOrDefault(i => i.Id == id);
+        }
+
         public IEnumerable<Center> getCenters()
         {
             return _context.Centers.Include(i => i.Center_Phones)
