@@ -18,14 +18,10 @@ namespace Infrastructure.Repositories
             this._context = context;
         }
 
-        public void AddDoctor()
+        public void AddDoctor(Center_doctor center_Doctor)
         {
-            throw new NotImplementedException();
-        }
-
-        public void AddInsurance()
-        {
-            throw new NotImplementedException();
+            _context.Center_Doctors.Add(center_Doctor);
+            _context.SaveChanges();
         }
 
         public void AddPhone(CenterPhone centerPhone)
@@ -40,12 +36,25 @@ namespace Infrastructure.Repositories
             _context.SaveChanges();
         }
 
+        public async void AddInsuranceCompany(CenterInsurance centerInsurance)
+        {
+            await _context.AddAsync(centerInsurance);
+            _context.SaveChanges();
+        }
+
         public Center getCenter(Guid id)
         {
-            return _context.Centers.Include(i => i.Center_Phones)
+            Center center = _context.Centers.Include(i => i.Center_Phones)
                 .Include(i => i.Center_Insurances)
                 .Include(i => i.Center_Doctors)
-                .Include(i => i.Center_Specialities).FirstOrDefault(i => i.Id == id);
+                .Include(i => i.Center_Specialities).FirstOrDefault(i => i.Id == id) ?? null!;
+            return center;
+        }
+
+        public void AddWeekDay(WeekDays weekDays)
+        {
+            _context.Add(weekDays);
+            _context.SaveChanges();
         }
 
         public IEnumerable<Center> getCenters()

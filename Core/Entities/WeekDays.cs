@@ -9,10 +9,14 @@ namespace Core.Entities
 {
     public class WeekDays
     {
-        
-        public DateTime StartTime { get; set; }
-        public DateTime EndTime { get; set; }
-        public DateTime Day { get; set; }
+
+        [Column(TypeName = "varchar(10)")]
+        public string StartTime { get; set; }
+        [Column(TypeName = "varchar(10)")]
+        public string EndTime { get; set; }
+
+        [Column(TypeName = "varchar(10)")]
+        public string Day { get; set; }
 
         // Navigator Props
 

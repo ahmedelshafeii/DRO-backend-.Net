@@ -13,8 +13,9 @@ namespace Core.Interfaces
 
         public void AddPhone(CenterPhone centerPhone);
         public void AddSpeciality(CenterSpeciality centerSpeciality);
-        public void AddInsurance();
-        public void AddDoctor();
+        public void AddInsuranceCompany(CenterInsurance centerInsurance);
+        public void AddDoctor(Center_doctor center_Doctor);
+        public void AddWeekDay(WeekDays weekDays);
 
         public IEnumerable<Center> getCenters();
 

@@ -24,6 +24,9 @@ namespace API.MapHelper
                 //.ForMember(i=>i.Center_WeekDays,x=>x.MapFrom(i=>i.Center_WeekDays.Select(c=>c.Day)))
                 ;
 
+            CreateMap<CenterDoctorDto, Center_doctor>();
+            CreateMap<WeekDayDto, WeekDays>();
+
         }
 
 

@@ -236,22 +236,24 @@ namespace Infrastructure.data.migrations
 
             modelBuilder.Entity("Core.Entities.WeekDays", b =>
                 {
+                    b.Property<string>("Day")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("StartTime")
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("EndTime")
+                        .HasColumnType("varchar(10)");
+
                     b.Property<Guid>("CenterId")
                         .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("Day")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("StartTime")
-                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("ClinicId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("EndTime")
-                        .HasColumnType("datetime2");
+                    b.HasKey("Day", "StartTime", "EndTime");
 
-                    b.HasKey("CenterId", "Day", "StartTime");
+                    b.HasIndex("CenterId");
 
                     b.HasIndex("ClinicId");
 

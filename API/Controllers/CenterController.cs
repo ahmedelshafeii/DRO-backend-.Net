@@ -53,7 +53,14 @@ namespace API.Controllers
                 Address = centerDTO.Address,
                 DocAdminId = centerDTO.DocAdminId
             };
-            _baseContext.AddAsync(center);
+            try
+            {
+                _baseContext.AddAsync(center);
+            }
+            catch
+            {
+                return BadRequest("Something Wrong!");
+            }
 
             return CreatedAtAction("GetCenter",new {id = center.Id},center);
         }
@@ -101,15 +108,78 @@ namespace API.Controllers
             return Ok("Created");
         }
 
+        [HttpPost("Insurance")]
+        public ActionResult AddCenterInsurance([FromBody] CenterInsuranceDto centerInsuranceDto)
+        {
+            CenterInsurance centerInsurance = new CenterInsurance
+            {
+                CenterId = centerInsuranceDto.CenterId,
+                InsuranceCompany = centerInsuranceDto.InsuranceCompany
+            };
+            try
+            {
+                _baseContext.AddInsuranceCompany(centerInsurance);
+            }
+            catch
+            {
+                return BadRequest("Something Wrong!");
+            }
+            
+            return Ok("Added Successfully!");
+            
+        }
+
+        [HttpPost("Doctors")]
+        public ActionResult AddCenterDoctor([FromBody]CenterDoctorDto centerDoctorDto)
+        {
+            Center_doctor center_Doctor=
+            //    new Center_doctor
+            //{
+            //    CenterId = centerDoctorDto.CenterId,
+            //    DoctorId = centerDoctorDto.DoctorId,
+            //    FEE = centerDoctorDto.FEE
+            //};
+            _mapper.Map<Center_doctor>(centerDoctorDto);
+            try
+            {
+                _baseContext.AddDoctor(center_Doctor);
+            }
+            catch
+            {
+                return BadRequest("SomethingWrong!");
+            }
+           
+            return Ok("Create Successfully!");
+        }
+
+
+        [HttpPost("WeekDays")]
+        public ActionResult AddDayTime([FromBody]WeekDayDto weekDayDto)
+        {
+
+            WeekDays weekDays = _mapper.Map<WeekDays>(weekDayDto);
+
+            try
+            {
+                _baseContext.AddWeekDay(weekDays);
+            }
+            catch
+            {
+                return BadRequest("Something Wrong!");
+            }
+
+            return Ok("Added!");
+        }
 
 
 
-        /// Center [ speciality - insurance - phone ]
-        ///Create
-        ///Update
-        ///Delete
-        ///Get All
-        ///Get Clinic(id)
+
+        //x Center [ speciality - insurance - phone ]
+        //x Create
+        // Update
+        // Delete
+        //x Get All
+        //x Get center(id)
 
     }
 }
