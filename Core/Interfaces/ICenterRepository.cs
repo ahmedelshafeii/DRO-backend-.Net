@@ -11,15 +11,15 @@ namespace Core.Interfaces
     {
 
 
-        public void AddPhone(CenterPhone centerPhone);
-        public void AddSpeciality(CenterSpeciality centerSpeciality);
-        public void AddInsuranceCompany(CenterInsurance centerInsurance);
-        public void AddDoctor(Center_doctor center_Doctor);
-        public void AddWeekDay(WeekDays weekDays);
+        Task AddPhone(CenterPhone centerPhone);
+        Task AddSpeciality(CenterSpeciality centerSpeciality);
+        Task AddInsuranceCompany(CenterInsurance centerInsurance);
+        Task AddDoctor(Center_doctor center_Doctor);
+        Task AddWeekDay(WeekDays weekDays);
 
-        public IEnumerable<Center> getCenters();
+        Task<IQueryable<Center>> getCenters();
 
-        public Center getCenter(Guid id);
+        Task<Center> getCenter(Guid id);
 
 
 

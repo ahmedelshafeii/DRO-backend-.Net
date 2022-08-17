@@ -18,31 +18,31 @@ namespace Infrastructure.Repositories
             this._context = context;
         }
 
-        public void AddDoctor(Center_doctor center_Doctor)
+        public async Task AddDoctor(Center_doctor center_Doctor)
         {
-            _context.Center_Doctors.Add(center_Doctor);
+            await _context.Center_Doctors.AddAsync(center_Doctor);
             _context.SaveChanges();
         }
 
-        public void AddPhone(CenterPhone centerPhone)
+        public async Task AddPhone(CenterPhone centerPhone)
         {
-            _context.Add(centerPhone);
+            await _context.AddAsync(centerPhone);
             _context.SaveChanges();
         }
 
-        public async void AddSpeciality(CenterSpeciality centerSpeciality)
+        public async Task AddSpeciality(CenterSpeciality centerSpeciality)
         {
             await _context.AddAsync(centerSpeciality);
             _context.SaveChanges();
         }
 
-        public async void AddInsuranceCompany(CenterInsurance centerInsurance)
+        public async Task AddInsuranceCompany(CenterInsurance centerInsurance)
         {
             await _context.AddAsync(centerInsurance);
             _context.SaveChanges();
         }
 
-        public Center getCenter(Guid id)
+        public async Task<Center> getCenter(Guid id)
         {
             Center center = _context.Centers.Include(i => i.Center_Phones)
                 .Include(i => i.Center_Insurances)
@@ -51,13 +51,13 @@ namespace Infrastructure.Repositories
             return center;
         }
 
-        public void AddWeekDay(WeekDays weekDays)
+        public async Task AddWeekDay(WeekDays weekDays)
         {
-            _context.Add(weekDays);
+            await _context.AddAsync(weekDays);
             _context.SaveChanges();
         }
 
-        public IEnumerable<Center> getCenters()
+        public async Task<IQueryable<Center>> getCenters()
         {
             return _context.Centers.Include(i => i.Center_Phones)
                 .Include(i => i.Center_Insurances)
