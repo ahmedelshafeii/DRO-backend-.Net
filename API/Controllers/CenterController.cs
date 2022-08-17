@@ -22,9 +22,9 @@ namespace API.Controllers
         }
 
         [HttpGet("all")]
-        public  ActionResult GetCenters()
+        public async Task<ActionResult> GetCenters()
         {
-            var centers = _baseContext.getCenters();
+            var centers = await _baseContext.getCenters();
 
            IReadOnlyList<CenterDto> centersDto =  _mapper.Map<IReadOnlyList<CenterDto>>(centers);
 
@@ -32,10 +32,10 @@ namespace API.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetCenter(Guid id)
+        public async Task<ActionResult> GetCenter(Guid id)
         {
 
-            Center center = _baseContext.getCenter(id);
+            Center center = await _baseContext.getCenter(id);
             if(center == null) 
                 return BadRequest("Something Wrong!");
            CenterDto centerDto =  _mapper.Map<CenterDto>(center);
@@ -45,7 +45,7 @@ namespace API.Controllers
         }
 
         [HttpPost]
-        public ActionResult CreateCenter([FromBody]AddCenterDTO centerDTO)
+        public async Task<ActionResult> CreateCenter([FromBody]AddCenterDTO centerDTO)
         {
             Center center = new Center
             {
@@ -55,7 +55,7 @@ namespace API.Controllers
             };
             try
             {
-                _baseContext.AddAsync(center);
+                await _baseContext.AddAsync(center);
             }
             catch
             {
@@ -66,7 +66,7 @@ namespace API.Controllers
         }
 
         [HttpPost("Phone")]
-        public ActionResult AddCenterPhone([FromBody] CenterPhoneDto centerPhoneDto)
+        public async Task<ActionResult> AddCenterPhone([FromBody] CenterPhoneDto centerPhoneDto)
         {
             CenterPhone centerPhone = new CenterPhone
             {
@@ -77,7 +77,7 @@ namespace API.Controllers
             try
             {
 
-            _baseContext.AddPhone(centerPhone);
+            await _baseContext.AddPhone(centerPhone);
             }
             catch
             {
@@ -89,7 +89,7 @@ namespace API.Controllers
         }
 
         [HttpPost("Speciality")]
-        public ActionResult AddCenterSpeciality([FromBody] CenterSpecialityDto centerSpecialityDto)
+        public async Task<ActionResult> AddCenterSpeciality([FromBody] CenterSpecialityDto centerSpecialityDto)
         {
             CenterSpeciality centerSpeciality = new CenterSpeciality
             {
@@ -98,7 +98,7 @@ namespace API.Controllers
             };
             try
             {
-                _baseContext.AddSpeciality(centerSpeciality);
+                await _baseContext.AddSpeciality(centerSpeciality);
             }
             catch
             {
@@ -109,7 +109,7 @@ namespace API.Controllers
         }
 
         [HttpPost("Insurance")]
-        public ActionResult AddCenterInsurance([FromBody] CenterInsuranceDto centerInsuranceDto)
+        public async Task<ActionResult> AddCenterInsurance([FromBody] CenterInsuranceDto centerInsuranceDto)
         {
             CenterInsurance centerInsurance = new CenterInsurance
             {
@@ -118,7 +118,7 @@ namespace API.Controllers
             };
             try
             {
-                _baseContext.AddInsuranceCompany(centerInsurance);
+                await _baseContext.AddInsuranceCompany(centerInsurance);
             }
             catch
             {
@@ -130,7 +130,7 @@ namespace API.Controllers
         }
 
         [HttpPost("Doctors")]
-        public ActionResult AddCenterDoctor([FromBody]CenterDoctorDto centerDoctorDto)
+        public async Task<ActionResult> AddCenterDoctor([FromBody]CenterDoctorDto centerDoctorDto)
         {
             Center_doctor center_Doctor=
             //    new Center_doctor
@@ -142,7 +142,7 @@ namespace API.Controllers
             _mapper.Map<Center_doctor>(centerDoctorDto);
             try
             {
-                _baseContext.AddDoctor(center_Doctor);
+                await _baseContext.AddDoctor(center_Doctor);
             }
             catch
             {
@@ -154,14 +154,14 @@ namespace API.Controllers
 
 
         [HttpPost("WeekDays")]
-        public ActionResult AddDayTime([FromBody]WeekDayDto weekDayDto)
+        public async Task<ActionResult> AddDayTime([FromBody]WeekDayDto weekDayDto)
         {
 
             WeekDays weekDays = _mapper.Map<WeekDays>(weekDayDto);
 
             try
             {
-                _baseContext.AddWeekDay(weekDays);
+                await _baseContext.AddWeekDay(weekDays);
             }
             catch
             {
