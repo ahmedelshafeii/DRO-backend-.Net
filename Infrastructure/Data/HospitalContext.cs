@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Entities.Review;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
@@ -29,6 +30,8 @@ namespace Infrastructure.Data
                 .HasMany(m => m.CentersManage).WithOne().OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey(f => f.DocAdminId);
             builder.Entity<Answer>().HasKey(k => new {k.dateTime,k.DoctorId,k.QuestionId });
+            builder.Entity<CenterReview>().HasKey(k=>new {k.DateTime,k.PatientId});
+            builder.Entity<ClinicReview>().HasKey(k=>new {k.DateTime,k.PatientId});
            
         }
 
@@ -42,6 +45,8 @@ namespace Infrastructure.Data
         public virtual DbSet<WeekDays> WeekDays { get; set; }
         public virtual DbSet<Question> Questions { get; set; }
         public virtual DbSet<Answer> Answers { get; set; }
+        public virtual DbSet<ClinicReview> ClinicReviews { get; set; }
+        public virtual DbSet<CenterReview> CenterReviews { get; set; }
 
 
 

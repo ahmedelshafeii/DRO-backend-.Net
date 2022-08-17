@@ -202,6 +202,58 @@ namespace Infrastructure.data.migrations
                     b.ToTable("Questions");
                 });
 
+            modelBuilder.Entity("Core.Entities.Review.CenterReview", b =>
+                {
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PatientId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("CenterId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("Rate")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReviewString")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DateTime", "PatientId");
+
+                    b.HasIndex("CenterId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("CenterReviews");
+                });
+
+            modelBuilder.Entity("Core.Entities.Review.ClinicReview", b =>
+                {
+                    b.Property<DateTime>("DateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("PatientId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<Guid>("ClinicId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int?>("Rate")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReviewString")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("DateTime", "PatientId");
+
+                    b.HasIndex("ClinicId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("ClinicReviews");
+                });
+
             modelBuilder.Entity("Core.Entities.User", b =>
                 {
                     b.Property<string>("Id")
@@ -546,6 +598,44 @@ namespace Infrastructure.data.migrations
                     b.HasOne("Core.Entities.User", "User")
                         .WithMany("Questions")
                         .HasForeignKey("PatientId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Core.Entities.Review.CenterReview", b =>
+                {
+                    b.HasOne("Core.Entities.Center", "Center")
+                        .WithMany()
+                        .HasForeignKey("CenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Center");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Core.Entities.Review.ClinicReview", b =>
+                {
+                    b.HasOne("Core.Entities.Clinic", "Clinic")
+                        .WithMany()
+                        .HasForeignKey("ClinicId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Clinic");
 
                     b.Navigation("User");
                 });

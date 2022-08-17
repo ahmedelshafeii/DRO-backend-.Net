@@ -18,10 +18,8 @@ namespace Core.Entities
         //Navigator props
 
 
-        //[ForeignKey("Doctor")]
         public Guid DocAdminId { get; set; }
 
-        //public Doctor Doctor { get; set; }
 
         public virtual List<CenterPhone> Center_Phones { get; set; }
         public virtual List<CenterSpeciality> Center_Specialities { get; set; }
