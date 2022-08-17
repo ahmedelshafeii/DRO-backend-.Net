@@ -22,6 +22,29 @@ namespace Infrastructure.data.migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("Core.Entities.Answer", b =>
+                {
+                    b.Property<DateTime>("dateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("DoctorId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("QuestionId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("AnswerString")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("dateTime", "DoctorId", "QuestionId");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("QuestionId");
+
+                    b.ToTable("Answers");
+                });
+
             modelBuilder.Entity("Core.Entities.Center", b =>
                 {
                     b.Property<Guid>("Id")
@@ -152,6 +175,31 @@ namespace Infrastructure.data.migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Doctors");
+                });
+
+            modelBuilder.Entity("Core.Entities.Question", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PatientId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("QuestionString")
+                        .HasColumnType("varchar(300)");
+
+                    b.Property<string>("Speciality")
+                        .HasColumnType("varchar(20)");
+
+                    b.Property<DateTime>("dateTime")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Questions");
                 });
 
             modelBuilder.Entity("Core.Entities.User", b =>
@@ -393,6 +441,25 @@ namespace Infrastructure.data.migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("Core.Entities.Answer", b =>
+                {
+                    b.HasOne("Core.Entities.Doctor", "Doctor")
+                        .WithMany("Answers")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Core.Entities.Question", "Question")
+                        .WithMany("Answers")
+                        .HasForeignKey("QuestionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Doctor");
+
+                    b.Navigation("Question");
+                });
+
             modelBuilder.Entity("Core.Entities.Center", b =>
                 {
                     b.HasOne("Core.Entities.Doctor", null)
@@ -470,6 +537,15 @@ namespace Infrastructure.data.migrations
                     b.HasOne("Core.Entities.User", "User")
                         .WithMany()
                         .HasForeignKey("UserId");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("Core.Entities.Question", b =>
+                {
+                    b.HasOne("Core.Entities.User", "User")
+                        .WithMany("Questions")
+                        .HasForeignKey("PatientId");
 
                     b.Navigation("User");
                 });
@@ -564,11 +640,23 @@ namespace Infrastructure.data.migrations
 
             modelBuilder.Entity("Core.Entities.Doctor", b =>
                 {
+                    b.Navigation("Answers");
+
                     b.Navigation("CentersManage");
 
                     b.Navigation("Clinics");
 
                     b.Navigation("Doctor_Centers");
+                });
+
+            modelBuilder.Entity("Core.Entities.Question", b =>
+                {
+                    b.Navigation("Answers");
+                });
+
+            modelBuilder.Entity("Core.Entities.User", b =>
+                {
+                    b.Navigation("Questions");
                 });
 #pragma warning restore 612, 618
         }

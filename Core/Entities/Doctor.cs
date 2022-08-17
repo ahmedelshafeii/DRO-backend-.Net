@@ -21,10 +21,12 @@ namespace Core.Entities
 
         
 
-        public virtual List<Center_doctor> Doctor_Centers { get; set;}
-        public virtual List<Clinic> Clinics { get; set; }
+        public virtual IEnumerable<Center_doctor> Doctor_Centers { get; set;}
+        public virtual IEnumerable<Clinic> Clinics { get; set; }
 
-        public virtual List<Center> CentersManage { get; set; }
+        public virtual IEnumerable<Center> CentersManage { get; set; }
+
+        public virtual IEnumerable<Answer> Answers { get; set; }
 
 
 

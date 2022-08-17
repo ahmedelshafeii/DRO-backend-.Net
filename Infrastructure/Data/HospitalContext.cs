@@ -28,6 +28,7 @@ namespace Infrastructure.Data
             builder.Entity<Doctor>()
                 .HasMany(m => m.CentersManage).WithOne().OnDelete(DeleteBehavior.NoAction)
                 .HasForeignKey(f => f.DocAdminId);
+            builder.Entity<Answer>().HasKey(k => new {k.dateTime,k.DoctorId,k.QuestionId });
            
         }
 
@@ -39,6 +40,8 @@ namespace Infrastructure.Data
         public virtual DbSet<CenterInsurance> Center_Insurances { get; set; }
         public virtual DbSet<CenterSpeciality> Center_Specialities { get; set; }
         public virtual DbSet<WeekDays> WeekDays { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<Answer> Answers { get; set; }
 
 
 

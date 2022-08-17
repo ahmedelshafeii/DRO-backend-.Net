@@ -12,5 +12,9 @@ namespace Core.Entities
         public DateTime? BirthDate { get; set; }
         public string Gender { get; set; }
 
+        // Navigator Props
+        public virtual IEnumerable<Question> Questions {get; set;}
+
+
     }
 }
