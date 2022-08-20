@@ -3,6 +3,7 @@ using API.DTOs;
 using API.DTOs.Patient;
 using AutoMapper;
 using Core.Entities;
+using Core.Entities.Review;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -83,6 +84,7 @@ namespace API.Controllers
             }
 
             var claims = await _userManager.GetClaimsAsync(patient);
+            //var role = claims.FirstOrDefault(i => i.Type == ClaimTypes.Role).Value;
 
             var key = _config.GetValue<string>("Key");
             var keyInBytes = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(key));
@@ -102,5 +104,20 @@ namespace API.Controllers
 
         }
 
+        [HttpPost("review")]
+        public async Task<ActionResult> AddReview([FromBody] ReviewDto reviewDto)
+        {
+            dynamic review;
+
+            if (reviewDto.EntityType.ToLower() == "center")
+                review = this._mapper.Map<CenterReview>(reviewDto);
+            else
+                review = this._mapper.Map<ClinicReview>(reviewDto);
+
+            try { await _context.AddReview(review); }
+            catch { return BadRequest("something wrong!"); }
+
+            return Ok("Added");
+        }
     }
 }

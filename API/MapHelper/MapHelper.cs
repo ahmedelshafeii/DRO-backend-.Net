@@ -1,9 +1,11 @@
-﻿using API.DTOs.Center;
+﻿using API.DTOs;
+using API.DTOs.Center;
 using API.DTOs.Clinic;
 using API.DTOs.Doctor;
 using API.DTOs.Patient;
 using AutoMapper;
 using Core.Entities;
+using Core.Entities.Review;
 
 namespace API.MapHelper
 {
@@ -25,7 +27,14 @@ namespace API.MapHelper
                 ;
 
             CreateMap<CenterDoctorDto, Center_doctor>();
+
             CreateMap<WeekDayDto, WeekDays>();
+
+            CreateMap<ReviewDto, CenterReview>()
+                .ForMember(m=>m.CenterId,i=>i.MapFrom(v=>v.EntityId));
+
+            CreateMap<ReviewDto, ClinicReview>()
+                .ForMember(m => m.ClinicId, i => i.MapFrom(v => v.EntityId));
 
         }
 

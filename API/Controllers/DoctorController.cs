@@ -66,7 +66,7 @@ namespace API.Controllers
             User user = await _userManager.FindByNameAsync(doctor.User.UserName);
 
 
-            _context.AddAsync(new Doctor
+            await _context.AddAsync(new Doctor
             {
                 Title = registerDto.Title,
                 Department = registerDto.Department,

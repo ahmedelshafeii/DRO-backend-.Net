@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities.Review;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -26,6 +27,8 @@ namespace Core.Entities
         public virtual List<CenterInsurance> Center_Insurances { get; set; }
         public virtual List<Center_doctor> Center_Doctors { get; set; }
         public virtual List<WeekDays> Center_WeekDays { get; set; }
+        public virtual IQueryable<CenterReview> CenterReviews { get; set; }
+
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Core.Entities;
+using Core.Entities.Review;
 using Core.Interfaces;
 using Infrastructure.Data;
 using System;
@@ -19,6 +20,11 @@ namespace Infrastructure.Repositories
             this._context = context;
         }
 
-
+       
+        public async Task AddReview<T>(T review) where T : Review
+        {
+            await _context.Set<T>().AddAsync(review);
+            await _context.SaveChangesAsync();
+        }
     }
 }

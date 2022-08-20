@@ -1,6 +1,7 @@
 ﻿using API.DTOs.Center;
 using AutoMapper;
 using Core.Entities;
+using Core.Entities.Review;
 using Core.Interfaces;
 using Infrastructure.Data;
 using Microsoft.AspNetCore.Mvc;
@@ -152,7 +153,6 @@ namespace API.Controllers
             return Ok("Create Successfully!");
         }
 
-
         [HttpPost("WeekDays")]
         public async Task<ActionResult> AddDayTime([FromBody]WeekDayDto weekDayDto)
         {
@@ -170,6 +170,12 @@ namespace API.Controllers
 
             return Ok("Added!");
         }
+
+        //[HttpGet("reviews")]
+        //public async Task<ActionResult<IReadOnlyList<CenterReview>>> GetReviews()
+        //{
+
+        //}
 
 
 

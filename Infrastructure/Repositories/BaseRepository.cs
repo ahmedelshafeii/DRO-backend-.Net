@@ -26,12 +26,12 @@ namespace Infrastructure.Repositories
 
         public async Task<T> GetByIdAsync(Guid id)
         {
-            return await _context.Set<T>().FindAsync(id);
+            return await _context.Set<T>().FindAsync(id)?? null!;
         }
 
-        public async Task AddAsync(T user)
+        public async Task AddAsync(T entity)
         {
-           await _context.Set<T>().AddAsync(user);
+           await _context.Set<T>().AddAsync(entity);
             _context.SaveChanges();
         }
     }

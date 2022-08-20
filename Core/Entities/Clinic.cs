@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Core.Entities.Review;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -17,7 +18,7 @@ namespace Core.Entities
         public string Phone { get; set; }
         [Required]
         public string Address { get; set; }
-        
+
         [Required]
         public double FEE { get; set; }
 
@@ -29,6 +30,7 @@ namespace Core.Entities
         public virtual Doctor Doctor { get; set; }
 
         public virtual List<WeekDays> WeekDays { get; set; }
+        public virtual IQueryable<ClinicReview> ClinicReviews { get; set; }
 
 
     }
